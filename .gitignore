@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.env
+.streamlit/secrets.toml
+*.log
+
+# 不需要的旧文件
+app.py
+quality_insight.py
+dash_app.py
+data_loader.py
+feishu_client.py
+daily_push.py
+gen_report.py
+gen_dashboard.py
+
+# 数据缓存文件
+*.json
+quality_report.html
+quality_dashboard.html
+push_log.txt
+*.txt
+*.bat
