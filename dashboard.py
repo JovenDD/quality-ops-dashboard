@@ -853,7 +853,7 @@ with st.sidebar:
 
     st.markdown('<div style="height:8px;"></div>', unsafe_allow_html=True)
 
-    if st.button("刷新数据", use_container_width=True):
+    if st.button("刷新数据", width="stretch"):
         st.cache_data.clear()
         st.rerun()
 
@@ -937,7 +937,7 @@ if page == "首页总览":
             plot_bgcolor=C["plotly_bg"], paper_bgcolor=C["plotly_bg"], font=dict(color=C["text_sub"]),
             xaxis=dict(gridcolor=C["grid"]), yaxis=dict(gridcolor=C["grid"], title="AUDIT分数"),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11, color=C["text_sub"])))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     with col2:
         st.markdown("### 问题等级分布")
         if audit_issues_all:
@@ -950,7 +950,7 @@ if page == "首页总览":
                 textinfo='label+percent', textfont=dict(color=C["text"], size=12))])
             fig_pie.update_layout(height=280, margin=dict(l=20, r=20, t=40, b=20),
                 plot_bgcolor=C["plotly_bg"], paper_bgcolor=C["plotly_bg"], font=dict(color=C["text_sub"]), showlegend=False)
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, width="stretch")
 
     st.markdown("### 最新风险预警")
     if quality_issues:
@@ -989,7 +989,7 @@ elif page == "AUDIT详情":
         col1, col2 = st.columns([3, 1])
         with col1:
             fig = create_bar_chart(data["dates"], data["scores"], data["target"][0] if data["target"] else 110, title=car_name, y_title="AUDIT分数")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         with col2:
             latest_score = data["scores"][-1] if data["scores"] else 0
             latest_target = data["target"][-1] if data["target"] else 110
@@ -1070,7 +1070,7 @@ elif page == "整车质量":
             plot_bgcolor=C["plotly_bg"], paper_bgcolor=C["plotly_bg"], font=dict(color=C["text_sub"]),
             xaxis=dict(gridcolor=C["grid"]), yaxis=dict(gridcolor=C["grid"], title="FTT%", range=[70, 100]),
             title=dict(text="FTT对比", font=dict(color=C["text"], size=16)), showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     with col2:
         fig = go.Figure()
         for qdata, qname in [(q_m9, "M9/一期"), (q_b1, "B1"), (q_b2, "B2")]:
@@ -1083,7 +1083,7 @@ elif page == "整车质量":
             plot_bgcolor=C["plotly_bg"], paper_bgcolor=C["plotly_bg"], font=dict(color=C["text_sub"]),
             xaxis=dict(gridcolor=C["grid"]), yaxis=dict(gridcolor=C["grid"], title="DPU"),
             title=dict(text="DPU对比", font=dict(color=C["text"], size=16)), showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
     st.markdown("### 重点升级问题")
@@ -1101,7 +1101,7 @@ elif page == "过程质量":
         st.markdown("#### 涂装AUDIT")
         if paint_audit_trend["dates"]:
             st.plotly_chart(create_bar_chart(paint_audit_trend["dates"], paint_audit_trend["scores"],
-                paint_audit_trend["target"], y_title="分数"), use_container_width=True)
+                paint_audit_trend["target"], y_title="分数"), width="stretch")
             latest_val = paint_audit_trend["scores"][-1]
             render_metric_card("最新涂装AUDIT", str(latest_val), target=paint_audit_trend["target"],
                               status=get_status_color(latest_val, paint_audit_trend["target"], reverse=True))
@@ -1111,7 +1111,7 @@ elif page == "过程质量":
         st.markdown("#### 车身AUDIT")
         if body_audit_trend["dates"]:
             st.plotly_chart(create_bar_chart(body_audit_trend["dates"], body_audit_trend["scores"],
-                body_audit_trend["target"], y_title="分数"), use_container_width=True)
+                body_audit_trend["target"], y_title="分数"), width="stretch")
             latest_val = body_audit_trend["scores"][-1]
             render_metric_card("最新车身AUDIT", str(latest_val), target=body_audit_trend["target"],
                               status=get_status_color(latest_val, body_audit_trend["target"], reverse=True))
@@ -1218,7 +1218,7 @@ elif page == "TOP问题":
                 textinfo='label+percent', textfont=dict(color=C["text"], size=12))])
             fig.update_layout(height=280, margin=dict(l=20, r=20, t=40, b=20),
                 plot_bgcolor=C["plotly_bg"], paper_bgcolor=C["plotly_bg"], font=dict(color=C["text_sub"]), showlegend=False)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
     with col2:
         st.markdown("### 问题列表")
         render_issue_table_html(all_issues, max_rows=30)
