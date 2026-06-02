@@ -205,7 +205,7 @@ C = {
 
 
 # ==================== 数据加载 ====================
-@st.cache_data(ttl=300, show_spinner="正在从飞书拉取最新数据...")
+@st.cache_data(ttl=300)
 def load_feishu_data():
     # 优先本地CLI
     try:
@@ -509,7 +509,10 @@ def get_status_color(value, target, reverse=False):
 
 
 # ==================== 数据解析 ====================
-raw = load_feishu_data()
+try:
+    raw = load_feishu_data()
+except Exception:
+    raw = None
 
 # ---- 1. AUDIT ----
 audit_cars = []
